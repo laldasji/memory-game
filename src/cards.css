@@ -1,0 +1,50 @@
+.boardContainer {
+    display: grid;
+    grid-row: 2 / 3;
+    height: 90dvh;
+    width: 100dvw;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.board {
+    width: min(100dvw, 1200px);
+    height: min-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc(220px), 1fr));
+    place-items: center;
+}
+
+.card {
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    width: 200px;
+    height: 300px;
+    margin: 15px;
+    transition-duration: 1s;
+    transform-style: preserve-3d;
+    border-radius: 0.33rem;
+    border: 1px solid white;
+}
+
+.card:hover {
+    border: 1px solid white;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    transform: scale(1.05);
+}
+
+.front, .back {
+    transition-duration: inherit;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 0.5rem;
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+}

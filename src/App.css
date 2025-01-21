@@ -1,0 +1,114 @@
+#root {
+    width: 100dvw;
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+    grid-template-rows: 10dvh 90dvh;
+    position: relative;
+}
+
+#introComponent {
+    position: absolute;
+    color: white;
+}
+
+@keyframes makeInvisible {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes makeVisible {
+    0% {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes flipFront {
+    0% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+@keyframes flipBack {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.hide {
+    animation-name: makeInvisible;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+.reveal {
+    animation-name: makeVisible;
+    animation-duration: 0.75s;
+    animation-fill-mode: forwards;
+}
+
+.rotateReveal {
+    animation-name: flipFront;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.rotateHide {
+    animation-name: flipBack;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(10px);
+    z-index: 9;
+    position: absolute;
+    transition-duration: 0.5s;
+    .overlayContent {
+        color: white;
+        display: grid;
+        place-items: center;
+        transition-duration: inherit;
+        h1 {
+            -webkit-text-stroke: 2px black;
+            letter-spacing: 2px;
+            font-size: 4rem;
+        }
+        & > * {
+            margin: 10px;
+            text-align: center;
+        }
+    }
+    button {
+        transition-duration: inherit;
+        padding: 1rem;
+        border-radius: 1rem;
+        z-index: 10;
+        outline: none;
+        border: 1px solid black;
+    }
+    button:hover {
+        box-shadow: 0 0 10px 0 red, 0 0 10px 10px black;
+    }
+    button:focus {
+        outline: none;
+    }
+}
