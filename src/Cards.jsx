@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './cards.css'
 
 /*
@@ -19,6 +20,13 @@ import './cards.css'
 16. Sheogorath
 17. Vaermina
 */
+
+const preloadImages = (imageUrls) => {
+    imageUrls.forEach(url => {
+      const img = new Image();
+      img.src = ('daedric-princes' + url + '.png');
+    });
+  };
 
 const cardSource = [
     'azura',
@@ -50,6 +58,9 @@ function shuffleArray(oldArr) {
 }
 
 function DisplayCards({ cardList, setCardList, gameOver, setGameOver}) {
+    useEffect(() => {
+        preloadImages(cardSource);
+    }, [])
     if (gameOver) return null;
 
     const shuffledCards = shuffleArray(cardList);
