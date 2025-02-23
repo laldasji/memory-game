@@ -95,37 +95,35 @@ function DisplayCards({ cardList, setCardList, gameOver, setGameOver}) {
             {
                 newCards.map(card =>
                     (
-                        <div key={card.id} className='card' onClick={() => {
+                        <div key={card.id} className='card rotateReveal' onClick={() => {
                             const cards = document.querySelectorAll('.card');
                             for (let i = 0; i < cards.length; i++) {
                                 cards[i].classList.remove('rotateReveal');
                                 cards[i].classList.add('rotateHide');
                             }
-                            setTimeout(() => {
+                            new Promise((resolve) => {setTimeout(() => {
                                 for (let i = 0; i < cards.length; i++) {
                                     cards[i].classList.remove('rotateHide');
                                 }
                                 const newCardList = [...cardList];
                                 if (newCardList[card.id].selected == true) {
                                     setGameOver(true);
+                                    resolve();
                                     return null;
                                 } else {
                                     newCardList[card.id].selected = true;
                                     setCardList(newCardList);
+                                    resolve();
                                 }
-                            }, 1000)
-                            setTimeout(() => {
+                            }, 1000);})
+                            .then(() => {
                                 const cards = document.querySelectorAll('.card');
                                 for (let i = 0; i < cards.length; i++) {
                                     cards[i].classList.add('rotateReveal');
                                 }
-                                setTimeout(() => {
-                                    for (let i = 0; i < cards.length; i++) {
-                                        cards[i].classList.remove('rotateReveal');
-                                    }   
-                                }, 1000)
-                            }, 1001)
-                        }}>
+                            })
+                        }}
+                        >
                             <img src={`daedric-princes/${cardSource[card.id]}.png`} alt={cardSource[card.id]} className='front'/>
                             <img src={`skyrim.png`} alt={`skyrim`} className='back'/>
                         </div>
